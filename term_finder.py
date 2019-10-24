@@ -4,18 +4,27 @@ Author: Richard A
 finds & returns a list of objects
 """
 import os
+from strings import filter_strings
+
+
+# gobals ---------------------------------------------------------------------
+
 
 term_to_find = None
 inclusions = []
 exclusions = []
+# test value please ignore
 _root_directory = __file__.split("dingometer\\")[-1]
 
+
+# classes --------------------------------------------------------------------
 
 class _line:
     def __init__(self, path_str, line_number, line_string):
         self.__dict__.update(locals())
 
 
+# functions ------------------------------------------------------------------
 
 
 def get_file_paths_to_check(root_directory):
@@ -24,7 +33,7 @@ def get_file_paths_to_check(root_directory):
             current_path_dirs,\
             current_path_files in os.walk(root_directory):
 
-        addable_files = _remove_irrelevant_strings(
+        addable_files = filter_strings(
             current_path_files, inclusions, exclusions
         )
 
@@ -34,5 +43,6 @@ def get_file_paths_to_check(root_directory):
 
 def find_term_in_dir(term, root_directory):
     pass
+
 
 print(get_file_paths_to_check(_root_directory))
